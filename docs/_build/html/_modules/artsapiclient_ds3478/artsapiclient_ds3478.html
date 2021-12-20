@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artsapiclient_ds3478.artsapiclient_ds3478 &mdash; artsapiclient_ds3478  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> artsapiclient_ds3478
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">Example usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">artsapiclient_ds3478</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>artsapiclient_ds3478.artsapiclient_ds3478</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artsapiclient_ds3478.artsapiclient_ds3478</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">unique</span> <span class="c1"># create user defined enumerations</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<div class="viewcode-block" id="ActionType"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ActionType">[docs]</a><span class="nd">@unique</span>
+<span class="k">class</span> <span class="nc">ActionType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ARTWORKS</span> <span class="o">=</span> <span class="s1">&#39;artworks&#39;</span>
+    <span class="n">AGENTS</span> <span class="o">=</span> <span class="s1">&#39;agents&#39;</span>
+    <span class="n">GALLERIES</span> <span class="o">=</span> <span class="s1">&#39;galleries&#39;</span>
+    <span class="n">EXHIBITIONS</span> <span class="o">=</span> <span class="s1">&#39;exhibitions&#39;</span>
+    <span class="n">CATALOGUES</span> <span class="o">=</span> <span class="s1">&#39;catalogues&#39;</span>
+    
+    <span class="c1"># get string version of enumeration from it&#39;s value</span>
+<div class="viewcode-block" id="ActionType.__str__"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ActionType.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string representation of this enumeration</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ActionType</span>
+<span class="sd">        &gt;&gt;&gt; a = ActionType.ARTWORKS</span>
+<span class="sd">        &gt;&gt;&gt; print(&#39;Selected type: {}&#39;.format(str(a)))</span>
+<span class="sd">        &gt;&gt;&gt; Selected type: artworks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span></div></div>
+
+<span class="c1"># https://www.artic.edu/open-access/public-api</span>
+<span class="c1"># https://api.artic.edu/docs/#introduction</span>
+
+<div class="viewcode-block" id="ArtInstChicagoApiClient"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient">[docs]</a><span class="k">class</span> <span class="nc">ArtInstChicagoApiClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_internal_cache</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        use_internal_cache: bool, optional</span>
+<span class="sd">            if true then store artworks, artists, galleries, exhibitions and catalogues </span>
+<span class="sd">            in an internal cache. Default value is True.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__base_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.artic.edu/api/v1&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__limit</span> <span class="o">=</span> <span class="mi">100</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__use_internal_cache</span> <span class="o">=</span> <span class="n">use_internal_cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__clear_artworks_cache</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__clear_agents_cache</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__clear_galleries_cache</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__clear_exhibitions_cache</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__clear_catalogues_cache</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__artworks_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__agents_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__galleries_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exhibitions_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__catalogues_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__show_diagnostics</span> <span class="o">=</span> <span class="kc">False</span>
+        
+    <span class="c1"># -----------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># -----------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_internal_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get property for use_internal_cache</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True to support and use an internal cache, False otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient()</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client.use_internal_cache = True</span>
+<span class="sd">        &gt;&gt;&gt; print(&#39;Use internal cache: {}&#39;.format(art_api_client.use_internal_cache))</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_internal_cache</span>
+    
+    <span class="nd">@use_internal_cache</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">use_internal_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_cache</span><span class="p">:</span><span class="nb">bool</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set property for use_internal_cache</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        use_cache: bool</span>
+<span class="sd">            True to support and use an internal cache, False otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient()</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client.use_internal_cache = True</span>
+<span class="sd">        &gt;&gt;&gt; print(&#39;Use internal cache: {}&#39;.format(art_api_client.use_internal_cache))</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__use_internal_cache</span> <span class="o">=</span> <span class="n">use_cache</span>
+        
+    <span class="c1"># -----------------------------------------------------------</span>
+    <span class="c1"># UTILITY METHODS</span>
+    <span class="c1"># -----------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__get_base_api_params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use. Gets Dictionary of properties needed</span>
+<span class="sd">        for querying public API for The Art Institute of Chicago. Contains &#39;page&#39;</span>
+<span class="sd">        and &#39;limit&#39; properties at minimum.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary of properties needed for querying public API for</span>
+<span class="sd">            The Art Institute of Chicago. Contains &#39;page&#39; and &#39;limit&#39;</span>
+<span class="sd">            properties at minimum.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">api_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__limit</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">api_params</span>
+    
+    <span class="k">def</span> <span class="nf">__get_action_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span><span class="n">ActionType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use. Creates the appropriate</span>
+<span class="sd">        url to invite the RESTful public API for The Art Institute of Chicago</span>
+<span class="sd">        to retrieve certain type of data.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        action: ActionType</span>
+<span class="sd">            Identifies which action type to apply to the public API for</span>
+<span class="sd">            The Art Institute of Chicago.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The updated url to invite the RESTful public API for The Art</span>
+<span class="sd">            Institute of Chicago to retrieve certain type of data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">ActionType</span><span class="p">),</span> <span class="s2">&quot;Invalid type for action&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__base_url</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">action</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__update_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">results_lst</span><span class="p">:[],</span> <span class="n">current_page</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use. Updates the internal data cache</span>
+<span class="sd">        with results from API calls to prevent making redundant subsequent calls</span>
+<span class="sd">        to the public API for The Art Institute of Chicago for the same data.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cache: dict</span>
+<span class="sd">            The internal cache of a specific type of query features (e.g., cache for artworks).</span>
+<span class="sd">        results_lst: list</span>
+<span class="sd">            A list of the return json from a call to the public API for The Art</span>
+<span class="sd">            Institute of Chicago to retrieve data. Each element of the list is the</span>
+<span class="sd">            json of a different API call.</span>
+<span class="sd">        current_page: int</span>
+<span class="sd">            Indicates the max page of data stored for a multi-page set of json results.</span>
+<span class="sd">        total_pages: int</span>
+<span class="sd">            Indicates the total number of pages to get all of the data back for</span>
+<span class="sd">            the intended query.</span>
+<span class="sd">        total: int</span>
+<span class="sd">            Indicates the total number of records for all of the data from</span>
+<span class="sd">            the intended query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;results_lst&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_lst</span>
+        <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;current_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_page</span>
+        <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;total_pages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_pages</span>
+        <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
+    
+    <span class="k">def</span> <span class="nf">__print_diag_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">:</span><span class="nb">object</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        json_obj: object</span>
+<span class="sd">            The json to be printed to the display console.</span>
+<span class="sd">        indent: int, optional</span>
+<span class="sd">            The number of spaces used in the indentation to properly</span>
+<span class="sd">            format the json printed to the display console.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">json</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="n">indent</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__get_pagination_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_json</span><span class="p">:</span><span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use. Gets the pagination details</span>
+<span class="sd">        from the return json of the RESTful API call.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request_json: object</span>
+<span class="sd">            The json from a call to the public API for The Art</span>
+<span class="sd">            Institute of Chicago to retrieve data.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            Tuple of three integers representing the &#39;current page&#39;, &#39;total number of pages&#39;</span>
+<span class="sd">            and the &#39;total number of records&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request_json</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;pagination&#39;</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
+            <span class="n">page_dict</span> <span class="o">=</span> <span class="n">request_json</span><span class="p">[</span><span class="s1">&#39;pagination&#39;</span><span class="p">]</span>
+            <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">page_dict</span><span class="p">[</span><span class="s1">&#39;current_page&#39;</span><span class="p">],</span> <span class="n">page_dict</span><span class="p">[</span><span class="s1">&#39;total_pages&#39;</span><span class="p">],</span> <span class="n">page_dict</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span>
+        
+    <span class="k">def</span> <span class="nf">__get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_url</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">api_params</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use. Makes a call to a RESTful API, with</span>
+<span class="sd">        the capability of retrying the attempt, and returns data returned from the API.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target_url: str</span>
+<span class="sd">            The URL to the public API to invoke a specific remote query/action</span>
+<span class="sd">            for data.</span>
+<span class="sd">        api_params: dict</span>
+<span class="sd">            The parameters to pass to the remote query/action.</span>
+<span class="sd">        max_retries: int</span>
+<span class="sd">            The maximum number of retry attempts to make if remote calls fail.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            Tuple of size three representing the HTTP status code of making a</span>
+<span class="sd">            RESTful API call, the returned json data and the error message of</span>
+<span class="sd">            an unexpected (but caught) exception.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">requests</span>
+        <span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="kn">import</span> <span class="n">HTTPError</span>
+        
+        <span class="n">status_code</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">err_message</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="n">re_run</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="k">while</span> <span class="n">re_run</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">api_params</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">req</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">status_code</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span>
+                    <span class="c1"># r.headers[&#39;content-type&#39;]</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+                    <span class="n">re_run</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">status_code</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">err_message</span> <span class="o">=</span> <span class="s1">&#39;Missing or invalid returned request object&#39;</span>
+                    <span class="n">re_run</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">http_err</span><span class="p">:</span>
+                <span class="n">status_code</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">err_message</span> <span class="o">=</span> <span class="s1">&#39;HTTP Error: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">http_err</span><span class="p">)</span>
+                <span class="n">max_retries</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">re_run</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">max_retries</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">False</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="n">status_code</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">err_message</span> <span class="o">=</span> <span class="s1">&#39;Exception: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+                <span class="n">max_retries</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">re_run</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">max_retries</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">False</span>
+            
+        <span class="k">return</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">err_message</span>
+    
+    <span class="k">def</span> <span class="nf">__get_json_as_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_json_lst</span><span class="p">:[],</span> <span class="n">parent_key</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">fields</span><span class="p">:[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use. Transforms the json from the public</span>
+<span class="sd">        RESTful API into a pandas DataFrame.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        results_json_lst: list</span>
+<span class="sd">            The URL to the public API to invoke a specific remote query/action</span>
+<span class="sd">            for data.</span>
+<span class="sd">        parent_key: str</span>
+<span class="sd">            Key of portion of json to extract data from.</span>
+<span class="sd">        fields: list</span>
+<span class="sd">            List of data elements to retain from extracted json data.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pd.DataFrame</span>
+<span class="sd">            A pandas DataFrame containing the transformed json results from the</span>
+<span class="sd">            RESTful API.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+        <span class="n">data_df</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">results_json_lst</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">results_json_lst</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">results_json_lst</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">parent_key</span><span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">fields</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+                    <span class="n">data_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">results_json_lst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">parent_key</span><span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">fields</span><span class="p">),</span> <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                    
+        <span class="k">return</span> <span class="n">data_df</span>
+    
+    <span class="k">def</span> <span class="nf">__get_data_and_pagination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span><span class="n">ActionType</span><span class="p">,</span> <span class="n">max_pages</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+        
+        <span class="n">status_code_lst</span><span class="p">,</span> <span class="n">results_lst</span><span class="p">,</span> <span class="n">err_message_lst</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        
+        <span class="n">target_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_action_url</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">api_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_base_api_params</span><span class="p">()</span>
+        
+        <span class="n">status_code</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">err_message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_request</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">api_params</span><span class="p">)</span>
+        <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_pagination_info</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__show_diagnostics</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__print_diag_json</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        
+        <span class="n">status_code_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">status_code</span><span class="p">)</span>
+        <span class="n">results_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">err_message_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err_message</span><span class="p">)</span>
+        
+        <span class="n">page_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">total_pages</span><span class="p">,</span> <span class="n">max_pages</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">current_page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">page_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">api_params</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="n">status_code</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">err_message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_request</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">api_params</span><span class="p">)</span>
+            <span class="n">current_page</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_pagination_info</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__show_diagnostics</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__print_diag_json</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            
+            <span class="n">status_code_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">status_code</span><span class="p">)</span>
+            <span class="n">results_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">err_message_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err_message</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">status_code_lst</span><span class="p">,</span> <span class="n">results_lst</span><span class="p">,</span> <span class="n">err_message_lst</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span>
+        
+    <span class="k">def</span> <span class="nf">__get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">clear_cache</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span><span class="n">ActionType</span><span class="p">,</span> <span class="n">fields</span><span class="p">:[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility method intended for internal use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_internal_cache</span><span class="p">)</span> <span class="ow">or</span> <span class="n">clear_cache</span><span class="p">:</span>
+            <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">status_code_lst</span><span class="p">,</span> <span class="n">results_lst</span><span class="p">,</span> <span class="n">err_message_lst</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data_and_pagination</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+            <span class="n">data_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_json_as_dataframe</span><span class="p">(</span>
+                <span class="n">results_json_lst</span> <span class="o">=</span> <span class="n">results_lst</span><span class="p">,</span>
+                <span class="n">parent_key</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+                <span class="n">fields</span> <span class="o">=</span> <span class="n">fields</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__update_cache</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">results_lst</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+            <span class="n">clear_cache</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;current_page&#39;</span><span class="p">],</span> <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;total_pages&#39;</span><span class="p">],</span> <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span>
+            <span class="n">data_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_json_as_dataframe</span><span class="p">(</span>
+                <span class="n">results_json_lst</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s1">&#39;results_lst&#39;</span><span class="p">],</span>
+                <span class="n">parent_key</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+                <span class="n">fields</span> <span class="o">=</span> <span class="n">fields</span>
+            <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">cache</span><span class="p">,</span> <span class="n">clear_cache</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span>
+        
+    <span class="c1"># -----------------------------------------------------------</span>
+    <span class="c1"># METHODS</span>
+    <span class="c1"># -----------------------------------------------------------</span>
+<div class="viewcode-block" id="ArtInstChicagoApiClient.clear_caches"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient.clear_caches">[docs]</a>    <span class="k">def</span> <span class="nf">clear_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Empties the internal cache of data.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client.clear_caches()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_internal_cache</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_artworks_cache</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_agents_cache</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_galleries_cache</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_exhibitions_cache</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_catalogues_cache</span> <span class="o">=</span> <span class="kc">True</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">__artworks_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__agents_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__galleries_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exhibitions_cache</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__catalogues_cache</span> <span class="o">=</span> <span class="kc">None</span></div>
+        
+<div class="viewcode-block" id="ArtInstChicagoApiClient.get_artworks"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient.get_artworks">[docs]</a>    <span class="k">def</span> <span class="nf">get_artworks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of artworks sorted by last updated date in descending order.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple of four elements represending a pandas DataFrame containing the</span>
+<span class="sd">            transformed json results from the RESTful API, the max page of a multi-page</span>
+<span class="sd">            set of return data from the public API, the total number of pages and the</span>
+<span class="sd">            total number of records in all of the artworks data.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &gt;&gt;&gt; artworks_df, current_page, total_pages, total = art_api_client.get_artworks()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__artworks_cache</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clear_artworks_cache</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__artworks_cache</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_artworks_cache</span><span class="p">,</span>
+            <span class="n">ActionType</span><span class="o">.</span><span class="n">ARTWORKS</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;date_display&#39;</span><span class="p">,</span> <span class="s1">&#39;place_of_origin&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_titles&#39;</span><span class="p">]</span>
+        <span class="p">)</span>        
+        <span class="k">return</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span></div>
+    
+<div class="viewcode-block" id="ArtInstChicagoApiClient.get_artists"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient.get_artists">[docs]</a>    <span class="k">def</span> <span class="nf">get_artists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of all artists sorted by last updated date in descending order.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple of four elements represending a pandas DataFrame containing the</span>
+<span class="sd">            transformed json results from the RESTful API, the max page of a multi-page</span>
+<span class="sd">            set of return data from the public API, the total number of pages and the</span>
+<span class="sd">            total number of records in all of the artists data.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &gt;&gt;&gt; artists_df, current_page, total_pages, total = art_api_client.get_artists()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__agents_cache</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clear_agents_cache</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__agents_cache</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_agents_cache</span><span class="p">,</span>
+            <span class="n">ActionType</span><span class="o">.</span><span class="n">AGENTS</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;is_artist&#39;</span><span class="p">,</span> <span class="s1">&#39;artwork_ids&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">data_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;is_artist&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span></div>
+    
+<div class="viewcode-block" id="ArtInstChicagoApiClient.get_galleries"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient.get_galleries">[docs]</a>    <span class="k">def</span> <span class="nf">get_galleries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude_closed</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of all galleries sorted by last updated date in descending order.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        exclude_closed: bool, optional</span>
+<span class="sd">            True returns data with closed galleries excluded. Otherwise, data</span>
+<span class="sd">            will include closed galleries as well. Default value is True.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple of four elements represending a pandas DataFrame containing the</span>
+<span class="sd">            transformed json results from the RESTful API, the max page of a multi-page</span>
+<span class="sd">            set of return data from the public API, the total number of pages and the</span>
+<span class="sd">            total number of records in all of the galleries data.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &gt;&gt;&gt; galleries_df, current_page, total_pages, total = art_api_client.get_galleries()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__galleries_cache</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clear_galleries_cache</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__galleries_cache</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_galleries_cache</span><span class="p">,</span>
+            <span class="n">ActionType</span><span class="o">.</span><span class="n">GALLERIES</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;is_closed&#39;</span><span class="p">,</span> <span class="s1">&#39;latlon&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">exclude_closed</span><span class="p">:</span>
+            <span class="n">data_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;is_closed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span></div>
+    
+<div class="viewcode-block" id="ArtInstChicagoApiClient.get_exhibitions"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient.get_exhibitions">[docs]</a>    <span class="k">def</span> <span class="nf">get_exhibitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude_closed</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of all exhibitions sorted by last updated date in descending order.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        exclude_closed: bool, optional</span>
+<span class="sd">            True returns data with closed exhibitions excluded. Otherwise, data</span>
+<span class="sd">            will include closed exhibitions as well. Default value is True.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple of four elements represending a pandas DataFrame containing the</span>
+<span class="sd">            transformed json results from the RESTful API, the max page of a multi-page</span>
+<span class="sd">            set of return data from the public API, the total number of pages and the</span>
+<span class="sd">            total number of records in all of the exhibitions data.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &gt;&gt;&gt; exhibitions_df, current_page, total_pages, total = art_api_client.get_exhibitions()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exhibitions_cache</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clear_exhibitions_cache</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__exhibitions_cache</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_exhibitions_cache</span><span class="p">,</span>
+            <span class="n">ActionType</span><span class="o">.</span><span class="n">EXHIBITIONS</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;short_description&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;artwork_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_ids&#39;</span><span class="p">]</span> <span class="c1"># &#39;is_featured&#39;, &#39;gallery_id&#39;, &#39;type&#39;,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">exclude_closed</span><span class="p">:</span>
+            <span class="n">data_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;Closed&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span></div>
+    
+<div class="viewcode-block" id="ArtInstChicagoApiClient.get_catalogues"><a class="viewcode-back" href="../../autoapi/artsapiclient_ds3478/artsapiclient_ds3478/index.html#artsapiclient_ds3478.artsapiclient_ds3478.ArtInstChicagoApiClient.get_catalogues">[docs]</a>    <span class="k">def</span> <span class="nf">get_catalogues</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of all catalogues sorted by last updated date in descending order.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple of four elements represending a pandas DataFrame containing the</span>
+<span class="sd">            transformed json results from the RESTful API, the max page of a multi-page</span>
+<span class="sd">            set of return data from the public API, the total number of pages and the</span>
+<span class="sd">            total number of records in all of the catalogues data.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from artsapiclient_ds3478 import ArtInstChicagoApiClient</span>
+<span class="sd">        &gt;&gt;&gt; art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)</span>
+<span class="sd">        &gt;&gt;&gt; catalogues_df, current_page, total_pages, total = art_api_client.get_catalogues()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__catalogues_cache</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clear_catalogues_cache</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__catalogues_cache</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__clear_catalogues_cache</span><span class="p">,</span>
+            <span class="n">ActionType</span><span class="o">.</span><span class="n">CATALOGUES</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">]</span>
+        <span class="p">)</span>        
+        <span class="k">return</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">total_pages</span><span class="p">,</span> <span class="n">total</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Donald Stephens.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

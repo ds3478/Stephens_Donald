@@ -1,0 +1,23 @@
+:py:mod:`artsapiclient_ds3478`
+==============================
+
+.. py:module:: artsapiclient_ds3478
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   artsapiclient_ds3478/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   
+
+   
+

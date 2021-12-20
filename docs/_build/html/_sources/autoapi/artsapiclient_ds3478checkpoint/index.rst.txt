@@ -1,0 +1,313 @@
+:py:mod:`artsapiclient_ds3478-checkpoint`
+=========================================
+
+.. py:module:: artsapiclient_ds3478-checkpoint
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   artsapiclient_ds3478-checkpoint.ActionType
+   artsapiclient_ds3478-checkpoint.ArtInstChicagoApiClient
+
+
+
+
+.. py:class:: ActionType
+
+   Bases: :py:obj:`enum.Enum`
+
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+   .. py:attribute:: ARTWORKS
+      :annotation: = artworks
+
+      
+
+   .. py:attribute:: AGENTS
+      :annotation: = agents
+
+      
+
+   .. py:attribute:: GALLERIES
+      :annotation: = galleries
+
+      
+
+   .. py:attribute:: EXHIBITIONS
+      :annotation: = exhibitions
+
+      
+
+   .. py:attribute:: CATALOGUES
+      :annotation: = catalogues
+
+      
+
+   .. py:method:: __str__(self)
+
+      Returns a string representation of this enumeration
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ActionType
+      >>> a = ActionType.ARTWORKS
+      >>> print('Selected type: {}'.format(str(a)))
+      >>> Selected type: artworks
+
+
+
+.. py:class:: ArtInstChicagoApiClient(use_internal_cache: bool = True)
+
+   Bases: :py:obj:`object`
+
+   .. py:method:: use_internal_cache(self) -> bool
+      :property:
+
+      Get property for use_internal_cache
+
+      :returns: True to support and use an internal cache, False otherwise.
+      :rtype: bool
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient()
+      >>> art_api_client.use_internal_cache = True
+      >>> print('Use internal cache: {}'.format(art_api_client.use_internal_cache))
+
+
+   .. py:method:: __get_base_api_params(self) -> dict
+
+      Utility method intended for internal use. Gets Dictionary of properties needed
+      for querying public API for The Art Institute of Chicago. Contains 'page'
+      and 'limit' properties at minimum.
+
+      :returns: Dictionary of properties needed for querying public API for
+                The Art Institute of Chicago. Contains 'page' and 'limit'
+                properties at minimum.
+      :rtype: dict
+
+
+   .. py:method:: __get_action_url(self, action: ActionType) -> str
+
+      Utility method intended for internal use. Creates the appropriate
+      url to invite the RESTful public API for The Art Institute of Chicago
+      to retrieve certain type of data.
+
+      :param action: Identifies which action type to apply to the public API for
+                     The Art Institute of Chicago.
+      :type action: ActionType
+
+      :returns: The updated url to invite the RESTful public API for The Art
+                Institute of Chicago to retrieve certain type of data.
+      :rtype: str
+
+
+   .. py:method:: __update_cache(self, cache: dict, results_lst: [], current_page: int, total_pages: int, total: int)
+
+      Utility method intended for internal use. Updates the internal data cache
+      with results from API calls to prevent making redundant subsequent calls
+      to the public API for The Art Institute of Chicago for the same data.
+
+      :param cache: The internal cache of a specific type of query features (e.g., cache for artworks).
+      :type cache: dict
+      :param results_lst: A list of the return json from a call to the public API for The Art
+                          Institute of Chicago to retrieve data. Each element of the list is the
+                          json of a different API call.
+      :type results_lst: list
+      :param current_page: Indicates the max page of data stored for a multi-page set of json results.
+      :type current_page: int
+      :param total_pages: Indicates the total number of pages to get all of the data back for
+                          the intended query.
+      :type total_pages: int
+      :param total: Indicates the total number of records for all of the data from
+                    the intended query.
+      :type total: int
+
+
+   .. py:method:: __print_diag_json(self, json_obj: object, indent: int = 4)
+
+      Utility method intended for internal use.
+
+      :param json_obj: The json to be printed to the display console.
+      :type json_obj: object
+      :param indent: The number of spaces used in the indentation to properly
+                     format the json printed to the display console.
+      :type indent: int, optional
+
+
+   .. py:method:: __get_pagination_info(self, request_json: object) -> (int, int, int)
+
+      Utility method intended for internal use. Gets the pagination details
+      from the return json of the RESTful API call.
+
+      :param request_json: The json from a call to the public API for The Art
+                           Institute of Chicago to retrieve data.
+      :type request_json: object
+
+      :returns: Tuple of three integers representing the 'current page', 'total number of pages'
+                and the 'total number of records'.
+      :rtype: tuple
+
+
+   .. py:method:: __get_request(self, target_url: str, api_params: dict, max_retries: int = 3) -> (int, object, str)
+
+      Utility method intended for internal use. Makes a call to a RESTful API, with
+      the capability of retrying the attempt, and returns data returned from the API.
+
+      :param target_url: The URL to the public API to invoke a specific remote query/action
+                         for data.
+      :type target_url: str
+      :param api_params: The parameters to pass to the remote query/action.
+      :type api_params: dict
+      :param max_retries: The maximum number of retry attempts to make if remote calls fail.
+      :type max_retries: int
+
+      :returns: Tuple of size three representing the HTTP status code of making a
+                RESTful API call, the returned json data and the error message of
+                an unexpected (but caught) exception.
+      :rtype: tuple
+
+
+   .. py:method:: __get_json_as_dataframe(self, results_json_lst: [], parent_key: str, fields: [str]) -> pandas.DataFrame
+
+      Utility method intended for internal use. Transforms the json from the public
+      RESTful API into a pandas DataFrame.
+
+      :param results_json_lst: The URL to the public API to invoke a specific remote query/action
+                               for data.
+      :type results_json_lst: list
+      :param parent_key: Key of portion of json to extract data from.
+      :type parent_key: str
+      :param fields: List of data elements to retain from extracted json data.
+      :type fields: list
+
+      :returns: A pandas DataFrame containing the transformed json results from the
+                RESTful API.
+      :rtype: pd.DataFrame
+
+
+   .. py:method:: __get_data_and_pagination(self, action: ActionType, max_pages: int = 3) -> (list, list, list, int, int, int)
+
+      Utility method intended for internal use.
+
+
+   .. py:method:: __get_data(self, cache, clear_cache, action: ActionType, fields: [str]) -> (dict, bool, pandas.DataFrame, int, int, int)
+
+      Utility method intended for internal use.
+
+
+   .. py:method:: clear_caches(self)
+
+      Empties the internal cache of data.
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)
+      >>> art_api_client.clear_caches()
+
+
+   .. py:method:: get_artworks(self) -> (pandas.DataFrame, int, int, int)
+
+      Gets a list of artworks sorted by last updated date in descending order.
+
+      :returns: A tuple of four elements represending a pandas DataFrame containing the
+                transformed json results from the RESTful API, the max page of a multi-page
+                set of return data from the public API, the total number of pages and the
+                total number of records in all of the artworks data.
+      :rtype: tuple
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)
+      >>> artworks_df, current_page, total_pages, total = art_api_client.get_artworks()
+
+
+   .. py:method:: get_artists(self) -> (pandas.DataFrame, int, int, int)
+
+      Gets a list of all artists sorted by last updated date in descending order.
+
+      :returns: A tuple of four elements represending a pandas DataFrame containing the
+                transformed json results from the RESTful API, the max page of a multi-page
+                set of return data from the public API, the total number of pages and the
+                total number of records in all of the artists data.
+      :rtype: tuple
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)
+      >>> artists_df, current_page, total_pages, total = art_api_client.get_artists()
+
+
+   .. py:method:: get_galleries(self, exclude_closed: bool = True) -> (pandas.DataFrame, int, int, int)
+
+      Gets a list of all galleries sorted by last updated date in descending order.
+
+      :param exclude_closed: True returns data with closed galleries excluded. Otherwise, data
+                             will include closed galleries as well. Default value is True.
+      :type exclude_closed: bool, optional
+
+      :returns: A tuple of four elements represending a pandas DataFrame containing the
+                transformed json results from the RESTful API, the max page of a multi-page
+                set of return data from the public API, the total number of pages and the
+                total number of records in all of the galleries data.
+      :rtype: tuple
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)
+      >>> galleries_df, current_page, total_pages, total = art_api_client.get_galleries()
+
+
+   .. py:method:: get_exhibitions(self, exclude_closed: bool = True) -> (pandas.DataFrame, int, int, int)
+
+      Gets a list of all exhibitions sorted by last updated date in descending order.
+
+      :param exclude_closed: True returns data with closed exhibitions excluded. Otherwise, data
+                             will include closed exhibitions as well. Default value is True.
+      :type exclude_closed: bool, optional
+
+      :returns: A tuple of four elements represending a pandas DataFrame containing the
+                transformed json results from the RESTful API, the max page of a multi-page
+                set of return data from the public API, the total number of pages and the
+                total number of records in all of the exhibitions data.
+      :rtype: tuple
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)
+      >>> exhibitions_df, current_page, total_pages, total = art_api_client.get_exhibitions()
+
+
+   .. py:method:: get_catalogues(self) -> (pandas.DataFrame, int, int, int)
+
+      Gets a list of all catalogues sorted by last updated date in descending order.
+
+      :returns: A tuple of four elements represending a pandas DataFrame containing the
+                transformed json results from the RESTful API, the max page of a multi-page
+                set of return data from the public API, the total number of pages and the
+                total number of records in all of the catalogues data.
+      :rtype: tuple
+
+      .. rubric:: Examples
+
+      >>> from artsapiclient_ds3478 import ArtInstChicagoApiClient
+      >>> art_api_client = ArtInstChicagoApiClient(use_internal_cache = True)
+      >>> catalogues_df, current_page, total_pages, total = art_api_client.get_catalogues()
+
+
+
